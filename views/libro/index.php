@@ -15,32 +15,38 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="libro-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+  <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>
-        <?= Html::a('Create Libro', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+  <p>
+    <?= Html::a('Create Libro', ['create'], ['class' => 'btn btn-success']) ?>
+  </p>
 
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+  <?php // echo $this->render('_search', ['model' => $searchModel]); 
+  ?>
 
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+  <?= GridView::widget([
+    'dataProvider' => $dataProvider,
+    'filterModel' => $searchModel,
+    'columns' => [
+      ['class' => 'yii\grid\SerialColumn'],
 
-            'lb_codigo',
-             'lb_titulo',
-            'imagen',
-            'id_format',
-         [
-                'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, Libro $model, $key, $index, $column) {
-                    return Url::toRoute([$action, 'lb_codigo' => $model->lb_codigo]);
-                 }
-            ],
-        ],
-    ]); ?>
+      'lb_codigo',
+      'lb_titulo',
+      [
+        'format' => 'html',
+        'value' => function ($data) {
+          return Html::img($data->imagen, ['width' => '60px']);
+        },
+      ],
+      'id_format',
+      [
+        'class' => ActionColumn::className(),
+        'urlCreator' => function ($action, Libro $model, $key, $index, $column) {
+          return Url::toRoute([$action, 'lb_codigo' => $model->lb_codigo]);
+        }
+      ],
+    ],
+  ]); ?>
 
 
 </div>

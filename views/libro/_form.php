@@ -10,17 +10,17 @@ use yii\widgets\ActiveForm;
 
 <div class="libro-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+  <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'lb_titulo')->textInput(['maxlength' => true]) ?>
+  <?= $form->field($model, 'lb_titulo')->textInput(['maxlength' => true]) ?>
+  <?= Html::img($model->imagen, ['width' => '60px']); ?>
+  <?= $form->field($model, 'archivo')->fileInput() ?>
 
-    <?= $form->field($model, 'archivo')->fileInput() ?>
 
-    
-    <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
-    </div>
+  <div class="form-group">
+    <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+  </div>
 
-    <?php ActiveForm::end(); ?>
+  <?php ActiveForm::end(); ?>
 
 </div>
