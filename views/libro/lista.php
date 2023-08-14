@@ -3,7 +3,7 @@
 /** @var yii\web\View $this */
 
 use yii\helpers\Html;
-use Yii\widgets\LinkPager;
+use Yii\widgets\LinkPager; // Pagina la informacion
 
 ?>
 
