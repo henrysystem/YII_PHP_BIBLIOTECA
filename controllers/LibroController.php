@@ -27,6 +27,7 @@ class LibroController extends Controller
       [
         'access' => [
           'class' => AccessControl::class,
+          'only' => ['index', 'view', 'create', 'update', 'delete'],
           'rules' => [
             [
               'allow' => true,
@@ -55,6 +56,7 @@ class LibroController extends Controller
     $dataProvider = $searchModel->search($this->request->queryParams);
 
     return $this->render('index', [
+
       'searchModel' => $searchModel,
       'dataProvider' => $dataProvider,
     ]);
@@ -129,7 +131,15 @@ class LibroController extends Controller
   public function actionLista()
   {
     $model = Libro::find();
-    return $this->render('lista');
+    $pagination = new Pagination(
+      [
+        'PageSize' => 1,
+        'totalCount' =>  $model->count(),
+      ]
+    );
+
+    $libros =  $model->orderBy('lb_titulo')->offset($pagination->offset)->limit($pagination->limit)->all();
+    return $this->render('lista', ['libros' => $libros, 'pagination' => $pagination]);
     # code...
   }
   /**
